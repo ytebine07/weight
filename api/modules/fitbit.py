@@ -8,7 +8,7 @@ class Fitbit:
     def __init__(self, body: Body):
         self.__body: Body = body
 
-    def save(self) -> bool:
+    def register(self) -> bool:
         self.__post_weight()
         self.__post_fat()
 
