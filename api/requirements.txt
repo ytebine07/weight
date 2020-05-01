@@ -1,1 +1,6 @@
 falcon
+requests
+
+flake8
+black
+pylint
