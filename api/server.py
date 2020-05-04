@@ -34,7 +34,11 @@ class Withings(object):
         body = client.fetch_last_body()
 
         resp.body = json.dumps(
-            {"weight": body.weight, "fat": body.fat, "registered_at": body.timestamp}
+            {
+                "weight": float(body.weight),
+                "fat": float(body.fat),
+                "registered_at": body.timestamp.strftime("%Y-%m-%d %H:%M:%S"),
+            }
         )
 
 
