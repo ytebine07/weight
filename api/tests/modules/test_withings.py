@@ -12,3 +12,4 @@ class Test_Withings(unittest.TestCase):
 
     def test_token(self):
         target = Token()
+        type(target)
