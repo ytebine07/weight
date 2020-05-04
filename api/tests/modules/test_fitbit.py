@@ -7,7 +7,7 @@ from modules.body import Body
 
 
 class TestFitbit(unittest.TestCase):
-    def test_test(self):
+    def test_register(self):
         body: Body = Body("92.9", "21.1", datetime.now())
-        f = Fitbit(body)
-        f.register()
+        f = Fitbit()
+        f.register(body)
