@@ -44,7 +44,8 @@ class Withings(object):
 
 class Fitbit(object):
     def on_get(self, req, resp):
-        pass
+        client = f_client()
+        resp.body = json.dumps(client.get_fat())
 
 
 app = falcon.API()

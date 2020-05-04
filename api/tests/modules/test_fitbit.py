@@ -11,3 +11,7 @@ class TestFitbit(unittest.TestCase):
         body: Body = Body("92.9", "21.1", datetime.now())
         f = Fitbit()
         f.register(body)
+
+    def test_get_fat(self):
+        f = Fitbit()
+        f.get_fat()
