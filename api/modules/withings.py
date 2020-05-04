@@ -1,10 +1,10 @@
-import os
 import requests
 import decimal
 import json
 from datetime import datetime, timedelta, timezone
 
 from modules.body import Body
+from modules.storage import Storage
 from modules.constants import Constants
 
 
@@ -45,25 +45,30 @@ class Meas:
         return int(datetime.now().strftime("%s"))
 
 
+class Tokenfile:
+    @staticmethod
+    def load(filepath: str):
+        with open(filepath, mode="r") as f:
+            return json.loads(f.read())
+
+    @staticmethod
+    def save(filepath: str, obj: object):
+        with open(filepath, mode="w") as f:
+            f.write(json.dumps(obj, indent=2))
+
+
 class Token:
     def __init__(self):
         super().__init__()
 
-        # 保存してあるのは有効期限切れてるかもなので、先にリフレッシュする
         self.refresh()
-
-        with open(Constants.WITHINGS_TOKEN_FILE_PATH, mode="r") as f:
-            self.__json = json.loads(f.read())
-        self.access_token = self.__json["access_token"]
+        loaded = Tokenfile.load(Constants.WITHINGS_TOKEN_FILE_PATH)
+        self.access_token = loaded["access_token"]
 
     def refresh(self):
 
-        credentials = {}
-        if os.path.exists(Constants.WITHINGS_TOKEN_FILE_PATH):
-            with open(Constants.WITHINGS_TOKEN_FILE_PATH, mode="r") as f:
-                credentials = json.loads(f.read())
-        else:
-            credentials["refresh_token"] = os.getenv("_WITHINGS_INIT_REFRESH_TOKEN")
+        storage = Storage()
+        credentials = json.loads(storage.download(Constants.WITHINGS_TOKEN_FILE_NAME))
 
         params = {
             "grant_type": "refresh_token",
@@ -77,8 +82,11 @@ class Token:
             "refresh_token": response["refresh_token"],
         }
 
-        with open(Constants.WITHINGS_TOKEN_FILE_PATH, mode="w") as f:
-            f.write(json.dumps(obj, indent=2))
+        Tokenfile.save(Constants.WITHINGS_TOKEN_FILE_PATH, obj)
+
+        storage.upload(
+            Constants.WITHINGS_TOKEN_FILE_NAME, Constants.WITHINGS_TOKEN_FILE_PATH
+        )
 
 
 class Withings:

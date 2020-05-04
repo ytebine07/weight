@@ -20,6 +20,7 @@ class Constants:
 
     WITHINGS_CLIENT_ID = os.getenv("_WITHINGS_CLIENT_ID")
     WITHINGS_CONS_SECRET = os.getenv("_WITHINGS_CONS_SECRET")
+    WITHINGS_TOKEN_FILE_NAME = "withings.json"
     WITHINGS_TOKEN_FILE_PATH = "/workspaces/weight/api/credentials/withings.json"
     WITHINGS_TOKEN_API_URL = "https://account.withings.com/oauth2/token"
     WITHINGS_MEASURE_API_URL = "https://wbsapi.withings.net/measure"
