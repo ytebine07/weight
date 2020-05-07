@@ -25,3 +25,7 @@ class Constants:
     WITHINGS_TOKEN_API_URL = "https://account.withings.com/oauth2/token"
     WITHINGS_MEASURE_API_URL = "https://wbsapi.withings.net/measure"
     WITHINGS_MEASURE_TERM_SECONDS = 60 * 60 * 5
+
+    GCP_UPLOAD_TO_GCS_KEY_PATH = (
+        "/workspaces/weight/api/credentials/gcp_upload_to_gcs.json"
+    )

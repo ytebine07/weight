@@ -2,16 +2,18 @@ import os
 import json
 from google.cloud import storage, secretmanager
 
+from modules.constants import Constants
+
 
 class Storage:
     def __init__(self):
         super().__init__()
 
-        if not os.path.exists(os.getenv("_GCP_UPLOAD_TO_GCS_KEY_PATH")):
+        if not os.path.exists(Constants.GCP_UPLOAD_TO_GCS_KEY_PATH):
             self.__download_credential()
 
         self.__client = storage.Client.from_service_account_json(
-            os.getenv("_GCP_UPLOAD_TO_GCS_KEY_PATH")
+            Constants.GCP_UPLOAD_TO_GCS_KEY_PATH
         )
         self.__bucket = self.__client.get_bucket("weight-transfer-api")
 
@@ -33,5 +35,5 @@ class Storage:
         response = client.access_secret_version(name)
         json_str = json.loads(response.payload.data.decode("UTF-8"))
 
-        with open(os.getenv("_GCP_UPLOAD_TO_GCS_KEY_PATH"), mode="w") as f:
+        with open(Constants.GCP_UPLOAD_TO_GCS_KEY_PATH, mode="w") as f:
             f.write(json.dumps(json_str, indent=2))
