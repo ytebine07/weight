@@ -28,7 +28,7 @@ class Storage:
         name = client.secret_version_path(
             os.getenv("_GCP_PROJECT_ID"),
             os.getenv("_GCP_KEY_NAME"),
-            os.getenv("GCP_KEY_VERSION"),
+            os.getenv("_GCP_KEY_VERSION"),
         )
         response = client.access_secret_version(name)
         json_str = json.loads(response.payload.data.decode("UTF-8"))
