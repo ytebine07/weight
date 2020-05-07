@@ -7,9 +7,9 @@
 # To fully customize the contents of this image, use the following Dockerfile instead:
 # https://github.com/microsoft/vscode-dev-containers/tree/v0.112.0/containers/python-3/.devcontainer/base.Dockerfile
 ARG VARIANT="3"
-FROM python:3.7
+FROM python:3.7-slim
 
-WORKDIR /workspace
+WORKDIR /workspaces/weight
 
 # [Optional] If your requirements rarely change, uncomment this section to add them to the image.
 #
@@ -17,8 +17,8 @@ COPY requirements.txt /tmp/pip-tmp/
 RUN pip3 --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements.txt \
     && rm -rf /tmp/pip-tmp
 
-ADD . /workspace/api
-WORKDIR /workspace/api
+ADD . /workspaces/weight/api
+WORKDIR /workspaces/weight/api
 
 # [Optional] Uncomment this section to install additional packages.
 #
