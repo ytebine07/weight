@@ -10,4 +10,4 @@ class TestStorage(unittest.TestCase):
 
     def test_download(self):
         target = Storage()
-        target.download("from_test.json")
+        print(target.download("from_test.json"))

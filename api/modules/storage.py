@@ -7,10 +7,12 @@ class Storage:
     def __init__(self):
         super().__init__()
 
-        if not os.path.exists(os.getenv("GOOGLE_APPLICATION_CREDENTIALS")):
+        if not os.path.exists(os.getenv("_GCP_UPLOAD_TO_GCS_KEY_PATH")):
             self.__download_credential()
 
-        self.__client = storage.Client()
+        self.__client = storage.Client.from_service_account_json(
+            os.getenv("_GCP_UPLOAD_TO_GCS_KEY_PATH")
+        )
         self.__bucket = self.__client.get_bucket("weight-transfer-api")
 
     def upload(self, name, path):
@@ -23,9 +25,13 @@ class Storage:
 
     def __download_credential(self):
         client = secretmanager.SecretManagerServiceClient()
-        name = client.secret_version_path("homes", "weight-transfer-api-to-gsc", 1)
+        name = client.secret_version_path(
+            os.getenv("_GCP_PROJECT_ID"),
+            os.getenv("_GCP_KEY_NAME"),
+            os.getenv("GCP_KEY_VERSION"),
+        )
         response = client.access_secret_version(name)
-        str = response.payload.data.decode("UTF-8")
+        json_str = json.loads(response.payload.data.decode("UTF-8"))
 
-        with open(os.getenv("GOOGLE_APPLICATION_CREDENTIALS"), mode="w") as f:
-            f.write(json.dumps(str, indent=2))
+        with open(os.getenv("_GCP_UPLOAD_TO_GCS_KEY_PATH"), mode="w") as f:
+            f.write(json.dumps(json_str, indent=2))
