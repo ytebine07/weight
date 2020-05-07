@@ -7,7 +7,7 @@
 # To fully customize the contents of this image, use the following Dockerfile instead:
 # https://github.com/microsoft/vscode-dev-containers/tree/v0.112.0/containers/python-3/.devcontainer/base.Dockerfile
 ARG VARIANT="3"
-FROM python:3.7-slim
+FROM python:3.7
 
 WORKDIR /workspaces/weight
 

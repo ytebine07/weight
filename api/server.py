@@ -24,14 +24,17 @@ class AppResource(object):
         fitbit = f_client()
         fitbit.register(body)
 
-        msg = {"status": "transfered"}
-        resp.body = json.dumps(msg)
+        resp.body = json.dumps({"status": "tranfsered"})
 
 
 class Withings(object):
     def on_get(self, req, resp):
         client = w_client()
         body = client.fetch_last_body()
+
+        if body.timestamp is None:
+            resp.body = json.dumps({"status": "nodata"})
+            return
 
         resp.body = json.dumps(
             {
