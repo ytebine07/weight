@@ -14,4 +14,4 @@ class TestFitbit(unittest.TestCase):
 
     def test_get_fat(self):
         f = Fitbit()
-        f.get_fat()
+        print(f.get_fat())

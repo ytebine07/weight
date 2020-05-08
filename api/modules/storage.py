@@ -28,9 +28,7 @@ class Storage:
     def __download_credential(self):
         client = secretmanager.SecretManagerServiceClient()
         name = client.secret_version_path(
-            os.getenv("_GCP_PROJECT_ID"),
-            os.getenv("_GCP_KEY_NAME"),
-            os.getenv("_GCP_KEY_VERSION"),
+            Constants.GCP_PROJECT_ID, Constants.GCP_KEY_NAME, Constants.GCP_KEY_VERSION
         )
         response = client.access_secret_version(name)
         json_str = json.loads(response.payload.data.decode("UTF-8"))

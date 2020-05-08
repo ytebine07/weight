@@ -29,3 +29,6 @@ class Constants:
     GCP_UPLOAD_TO_GCS_KEY_PATH = (
         "/workspaces/weight/api/credentials/gcp_upload_to_gcs.json"
     )
+    GCP_PROJECT_ID = os.getenv("_GCP_PROJECT_ID")
+    GCP_KEY_NAME = os.getenv("_GCP_KEY_NAME")
+    GCP_KEY_VERSION = os.getenv("_GCP_KEY_VERSION")

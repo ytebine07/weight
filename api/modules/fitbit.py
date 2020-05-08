@@ -4,6 +4,10 @@ from modules.body import Body
 
 
 class Fitbit:
+    """
+    https://dev.fitbit.com/build/reference/web-api/oauth2/
+    """
+
     def __init__(self):
         pass
 

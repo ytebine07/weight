@@ -90,6 +90,9 @@ class Token:
 
 
 class Withings:
+    """
+    https://developer.withings.com/oauth2/#tag/OAuth-2.0
+    """
 
     MEASTYPYE_WEIGHT_KG = 1
     MEASTYPE_PAT_PERCENTAGE = 6
