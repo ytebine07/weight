@@ -1,8 +1,9 @@
 # weight
-Transfer weight and body fat percentage from Withings to Fitbit.  
-[image]
+Transfer weight and body fat percentage from Withings to Fitbit.    
+This repository covers the blue area.  
 
-This repository covers the blue area.
+![image](https://github.com/ytebine07/weight/blob/master/resources/weight.png)
+
 
 ## Settings
 This system need to set there enviroment.
